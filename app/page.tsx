@@ -7,15 +7,14 @@ import WhyHleduroom from "@/components/why-hleduroom"
 import JoinNowCTA from "@/components/join-now-cta"
 import NoticeSection from "@/components/ui/notice-section"
 import { notices } from "@/lib/data/notices"
+import HomePageNoticeSection from "@/components/home/home-page-notice-section"
 
 export default function HomePage() {
-  const sortedNotices = notices.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  const noticesForHomePage = sortedNotices.slice(0, 5); // Show top 5 notices
 
   return (
     <main className="min-h-screen">
       <HeroSection />
-      <NoticeSection notices={noticesForHomePage} viewAllLink="/notices"  />
+      <HomePageNoticeSection />
       <FeaturesSection />
       <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100" />}>
         <PopularCourses />

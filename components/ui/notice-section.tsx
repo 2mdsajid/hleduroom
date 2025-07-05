@@ -1,12 +1,13 @@
 import React from 'react';
-import Link from 'next/link'; // For the "View All" link
+import Link from 'next/link';
+import { DeleteNoticeButton } from '../notice-delete-button'; // 1. Import the delete button
 
 // Define the type for a single notice item
 interface Notice {
-  id: number;
+  id: string;
   title: string;
   description: string;
-  date: string;
+  date: any;
 }
 
 // Define the props for the NoticeSection component
@@ -82,14 +83,22 @@ const NoticeSection: React.FC<NoticeSectionProps> = ({ notices, viewAllLink = '/
               </div>
 
               {/* Notice Content */}
-              <div className="flex-grow">
-                <h3 className="text-gray-900 font-semibold text-lg mb-1 leading-tight">{notice.title}</h3>
-                {notice.description && (
-                  <p className="text-gray-700 text-sm mb-1 line-clamp-2">
-                    {notice.description}
-                  </p>
-                )}
-                <p className="text-gray-500 text-xs">{notice.date}</p>
+              {/* 2. Layout updated to space content and button apart */}
+              <div className="flex-grow flex justify-between items-start gap-4">
+                <div>
+                  <h3 className="text-gray-900 font-semibold text-lg mb-1 leading-tight">{notice.title}</h3>
+                  {notice.description && (
+                    <p className="text-gray-700 text-sm mb-1 line-clamp-2">
+                      {notice.description}
+                    </p>
+                  )}
+                  <p className="text-gray-500 text-xs">{notice.date as any}</p>
+                </div>
+
+                {/* 3. Delete button added here */}
+                {/* <div className="flex-shrink-0">
+                  <DeleteNoticeButton noticeId={notice.id} />
+                </div> */}
               </div>
             </div>
           ))
