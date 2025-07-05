@@ -1,6 +1,6 @@
 'use server'
 
-import { prisma } from "../db";
+import prisma from "../db";
 import {  User } from "../generated/prisma";
 
 // For security, we define a type that is the same as the User model but omits the password.
