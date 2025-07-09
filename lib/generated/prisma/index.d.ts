@@ -2335,6 +2335,7 @@ export namespace Prisma {
     subject: string | null
     chapter: string | null
     youtubeUrl: string | null
+    level: string | null
     pdfLink: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2346,6 +2347,7 @@ export namespace Prisma {
     subject: string | null
     chapter: string | null
     youtubeUrl: string | null
+    level: string | null
     pdfLink: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2357,6 +2359,7 @@ export namespace Prisma {
     subject: number
     chapter: number
     youtubeUrl: number
+    level: number
     pdfLink: number
     createdAt: number
     updatedAt: number
@@ -2370,6 +2373,7 @@ export namespace Prisma {
     subject?: true
     chapter?: true
     youtubeUrl?: true
+    level?: true
     pdfLink?: true
     createdAt?: true
     updatedAt?: true
@@ -2381,6 +2385,7 @@ export namespace Prisma {
     subject?: true
     chapter?: true
     youtubeUrl?: true
+    level?: true
     pdfLink?: true
     createdAt?: true
     updatedAt?: true
@@ -2392,6 +2397,7 @@ export namespace Prisma {
     subject?: true
     chapter?: true
     youtubeUrl?: true
+    level?: true
     pdfLink?: true
     createdAt?: true
     updatedAt?: true
@@ -2476,6 +2482,7 @@ export namespace Prisma {
     subject: string
     chapter: string
     youtubeUrl: string | null
+    level: string | null
     pdfLink: string
     createdAt: Date
     updatedAt: Date
@@ -2504,6 +2511,7 @@ export namespace Prisma {
     subject?: boolean
     chapter?: boolean
     youtubeUrl?: boolean
+    level?: boolean
     pdfLink?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2515,6 +2523,7 @@ export namespace Prisma {
     subject?: boolean
     chapter?: boolean
     youtubeUrl?: boolean
+    level?: boolean
     pdfLink?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2526,6 +2535,7 @@ export namespace Prisma {
     subject?: boolean
     chapter?: boolean
     youtubeUrl?: boolean
+    level?: boolean
     pdfLink?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2537,12 +2547,13 @@ export namespace Prisma {
     subject?: boolean
     chapter?: boolean
     youtubeUrl?: boolean
+    level?: boolean
     pdfLink?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type NoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "subject" | "chapter" | "youtubeUrl" | "pdfLink" | "createdAt" | "updatedAt", ExtArgs["result"]["note"]>
+  export type NoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "subject" | "chapter" | "youtubeUrl" | "level" | "pdfLink" | "createdAt" | "updatedAt", ExtArgs["result"]["note"]>
 
   export type $NotePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Note"
@@ -2553,6 +2564,7 @@ export namespace Prisma {
       subject: string
       chapter: string
       youtubeUrl: string | null
+      level: string | null
       pdfLink: string
       createdAt: Date
       updatedAt: Date
@@ -2984,6 +2996,7 @@ export namespace Prisma {
     readonly subject: FieldRef<"Note", 'String'>
     readonly chapter: FieldRef<"Note", 'String'>
     readonly youtubeUrl: FieldRef<"Note", 'String'>
+    readonly level: FieldRef<"Note", 'String'>
     readonly pdfLink: FieldRef<"Note", 'String'>
     readonly createdAt: FieldRef<"Note", 'DateTime'>
     readonly updatedAt: FieldRef<"Note", 'DateTime'>
@@ -7627,6 +7640,7 @@ export namespace Prisma {
     subject: 'subject',
     chapter: 'chapter',
     youtubeUrl: 'youtubeUrl',
+    level: 'level',
     pdfLink: 'pdfLink',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -7852,6 +7866,7 @@ export namespace Prisma {
     subject?: StringFilter<"Note"> | string
     chapter?: StringFilter<"Note"> | string
     youtubeUrl?: StringNullableFilter<"Note"> | string | null
+    level?: StringNullableFilter<"Note"> | string | null
     pdfLink?: StringFilter<"Note"> | string
     createdAt?: DateTimeFilter<"Note"> | Date | string
     updatedAt?: DateTimeFilter<"Note"> | Date | string
@@ -7863,6 +7878,7 @@ export namespace Prisma {
     subject?: SortOrder
     chapter?: SortOrder
     youtubeUrl?: SortOrderInput | SortOrder
+    level?: SortOrderInput | SortOrder
     pdfLink?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7877,6 +7893,7 @@ export namespace Prisma {
     subject?: StringFilter<"Note"> | string
     chapter?: StringFilter<"Note"> | string
     youtubeUrl?: StringNullableFilter<"Note"> | string | null
+    level?: StringNullableFilter<"Note"> | string | null
     pdfLink?: StringFilter<"Note"> | string
     createdAt?: DateTimeFilter<"Note"> | Date | string
     updatedAt?: DateTimeFilter<"Note"> | Date | string
@@ -7888,6 +7905,7 @@ export namespace Prisma {
     subject?: SortOrder
     chapter?: SortOrder
     youtubeUrl?: SortOrderInput | SortOrder
+    level?: SortOrderInput | SortOrder
     pdfLink?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7905,6 +7923,7 @@ export namespace Prisma {
     subject?: StringWithAggregatesFilter<"Note"> | string
     chapter?: StringWithAggregatesFilter<"Note"> | string
     youtubeUrl?: StringNullableWithAggregatesFilter<"Note"> | string | null
+    level?: StringNullableWithAggregatesFilter<"Note"> | string | null
     pdfLink?: StringWithAggregatesFilter<"Note"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Note"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Note"> | Date | string
@@ -8267,6 +8286,7 @@ export namespace Prisma {
     subject: string
     chapter: string
     youtubeUrl?: string | null
+    level?: string | null
     pdfLink: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -8278,6 +8298,7 @@ export namespace Prisma {
     subject: string
     chapter: string
     youtubeUrl?: string | null
+    level?: string | null
     pdfLink: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -8289,6 +8310,7 @@ export namespace Prisma {
     subject?: StringFieldUpdateOperationsInput | string
     chapter?: StringFieldUpdateOperationsInput | string
     youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableStringFieldUpdateOperationsInput | string | null
     pdfLink?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8300,6 +8322,7 @@ export namespace Prisma {
     subject?: StringFieldUpdateOperationsInput | string
     chapter?: StringFieldUpdateOperationsInput | string
     youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableStringFieldUpdateOperationsInput | string | null
     pdfLink?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8311,6 +8334,7 @@ export namespace Prisma {
     subject: string
     chapter: string
     youtubeUrl?: string | null
+    level?: string | null
     pdfLink: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -8322,6 +8346,7 @@ export namespace Prisma {
     subject?: StringFieldUpdateOperationsInput | string
     chapter?: StringFieldUpdateOperationsInput | string
     youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableStringFieldUpdateOperationsInput | string | null
     pdfLink?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8333,6 +8358,7 @@ export namespace Prisma {
     subject?: StringFieldUpdateOperationsInput | string
     chapter?: StringFieldUpdateOperationsInput | string
     youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableStringFieldUpdateOperationsInput | string | null
     pdfLink?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8789,6 +8815,7 @@ export namespace Prisma {
     subject?: SortOrder
     chapter?: SortOrder
     youtubeUrl?: SortOrder
+    level?: SortOrder
     pdfLink?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8800,6 +8827,7 @@ export namespace Prisma {
     subject?: SortOrder
     chapter?: SortOrder
     youtubeUrl?: SortOrder
+    level?: SortOrder
     pdfLink?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8811,6 +8839,7 @@ export namespace Prisma {
     subject?: SortOrder
     chapter?: SortOrder
     youtubeUrl?: SortOrder
+    level?: SortOrder
     pdfLink?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder

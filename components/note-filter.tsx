@@ -1,36 +1,43 @@
-"use client"; // This directive marks it as a client component
+"use client";
 
 import React, { useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 interface FilterControlsProps {
   uniqueSubjects: string[];
-  // New prop: A map of subjects to their unique chapters
   subjectChapterMap: { [subject: string]: string[] };
+  uniqueLevels: string[]; // 1. Add uniqueLevels prop
 }
 
-const FilterControls= ({ uniqueSubjects, subjectChapterMap }:FilterControlsProps) => {
+const FilterControls = ({ uniqueSubjects, subjectChapterMap, uniqueLevels }: FilterControlsProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const selectedSubject = searchParams.get('subject') || 'all';
   const selectedChapter = searchParams.get('chapter') || 'all';
+  const selectedLevel = searchParams.get('level') || 'all'; // 2. Get selected level
 
-  // Dynamically determine chapters to show based on selectedSubject
+  // Memoize chapters to show based on the selected subject
   const chaptersToShow = useMemo(() => {
     if (selectedSubject === 'all') {
-      // If 'all subjects' is selected, show all unique chapters from the map
       const allChapters = new Set<string>();
       Object.values(subjectChapterMap).forEach(chapters => {
         chapters.forEach(chapter => allChapters.add(chapter));
       });
       return ['all', ...Array.from(allChapters).sort()];
-    } else {
-      // Show only chapters for the selected subject
-      const chaptersForSubject = subjectChapterMap[selectedSubject] || [];
-      return ['all', ...chaptersForSubject.sort()];
     }
+    return ['all', ...(subjectChapterMap[selectedSubject] || []).sort()];
   }, [selectedSubject, subjectChapterMap]);
+
+  // 3. Handle level changes
+  const handleLevelChange = (level: string) => {
+    const params = new URLSearchParams(); // Start with fresh params
+    if (level !== 'all') {
+      params.set('level', level);
+    }
+    // Reset subject and chapter when level changes
+    router.push(`?${params.toString()}`);
+  };
 
   const handleSubjectChange = (subject: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -39,7 +46,7 @@ const FilterControls= ({ uniqueSubjects, subjectChapterMap }:FilterControlsProps
     } else {
       params.set('subject', subject);
     }
-    // IMPORTANT: Reset chapter filter when subject changes
+    // Reset chapter when subject changes
     params.delete('chapter');
     router.push(`?${params.toString()}`);
   };
@@ -55,16 +62,36 @@ const FilterControls= ({ uniqueSubjects, subjectChapterMap }:FilterControlsProps
   };
 
   const formatChapterName = (chapter: string) => {
-    // Replace underscores with spaces and capitalize each word
     return chapter.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   };
 
   return (
-    <div className="mb-10 p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-4">Filter Resources</h2>
+    <div className="mb-10 p-6 bg-white rounded-lg shadow-md space-y-6">
+      <h2 className="text-2xl font-semibold text-gray-800">Filter Resources</h2>
       
-      <div className="mb-6">
-        <label htmlFor="subject-filter" className="block text-sm font-medium text-gray-700 mb-2">Filter by Subject:</label>
+      {/* 4. Level Filter Section */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Level:</label>
+        <div className="flex flex-wrap gap-3">
+          {uniqueLevels.map(level => (
+            <button
+              key={level}
+              onClick={() => handleLevelChange(level)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200
+                ${selectedLevel === level
+                  ? 'bg-teal-600 text-white shadow-md'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+            >
+              {level === 'all' ? 'All Levels' : level.charAt(0).toUpperCase() + level.slice(1)}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Subject Filter Section */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Subject:</label>
         <div className="flex flex-wrap gap-3">
           {uniqueSubjects.map(subject => (
             <button
@@ -82,22 +109,19 @@ const FilterControls= ({ uniqueSubjects, subjectChapterMap }:FilterControlsProps
         </div>
       </div>
 
+      {/* Chapter Filter Section */}
       <div>
-        <label htmlFor="chapter-filter" className="block text-sm font-medium text-gray-700 mb-2">Filter by Chapter:</label>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Chapter:</label>
         <div className="flex flex-wrap gap-3">
           {chaptersToShow.map(chapter => (
             <button
               key={chapter}
               onClick={() => handleChapterChange(chapter)}
-              // Disable chapter filter if 'all subjects' is selected and a specific chapter is active but not in the new list
-              disabled={selectedSubject !== 'all' && chaptersToShow.indexOf(selectedChapter) === -1 && chapter === selectedChapter}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200
                 ${selectedChapter === chapter
                   ? 'bg-blue-600 text-white shadow-md'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }
-                ${selectedSubject !== 'all' && chaptersToShow.indexOf(selectedChapter) === -1 && chapter === selectedChapter ? 'opacity-50 cursor-not-allowed' : ''}
-              `}
+                }`}
             >
               {chapter === 'all' ? 'All Chapters' : formatChapterName(chapter)}
             </button>

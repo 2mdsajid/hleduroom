@@ -1,24 +1,58 @@
-// In /components/popular-courses.tsx
+'use client'; // 1. This is now a client component
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Star, Clock, Users, BookOpen } from "lucide-react"
-import Link from "next/link"
+import React, { useState, useEffect } from 'react';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Star, Clock, Users, BookOpen } from "lucide-react";
+import Link from "next/link";
+import { TCourse } from "@/lib/schema/course.schema";
+import { getCourses } from '@/lib/actions/course.actions';
+import PopularCoursesSkeleton from './popular-course-skeleton';
 
-// Import the server action and the TCourse type
-import { getCourses } from "@/lib/actions/course.actions"
-import { TCourse } from "@/lib/schema/course.schema"
+export default function PopularCourses() {
+  // 2. State for courses, loading, and error
+  const [courses, setCourses] = useState<TCourse[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-// Make the component async to fetch data
-export default async function PopularCourses() {
-  const popularCourses: TCourse[] = await getCourses();
+  // 3. Fetch data when the component mounts
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const popularCourses = await getCourses();
+        setCourses(popularCourses);
+      } catch (err) {
+        console.error("Failed to fetch popular courses:", err);
+        setError("Could not load courses. Please try again later.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  // If no popular courses are found, don't render the section
-  if (!popularCourses || popularCourses.length === 0) {
+    fetchCourses();
+  }, []); // Empty dependency array means this runs once on mount
+
+  // 4. Show a loading skeleton while fetching
+  if (isLoading) {
+    return <PopularCoursesSkeleton />;
+  }
+
+  // 5. Handle errors during fetch
+  if (error) {
+    return (
+      <section className="py-20 bg-gray-50 text-center">
+        <p className="text-red-600">{error}</p>
+      </section>
+    );
+  }
+  
+  // Don't render the section if no courses are found
+  if (courses.length === 0) {
     return null;
   }
 
+  // 6. Render the fetched data
   return (
     <section className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,7 +64,7 @@ export default async function PopularCourses() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {popularCourses.map((course) => (
+          {courses.map((course) => (
             <Card key={course.id} className="overflow-hidden hover:shadow-xl transition-shadow flex flex-col">
               <div className="relative">
                 <img src={course.image || "/placeholder.svg"} alt={course.title} className="w-full h-48 object-cover" />

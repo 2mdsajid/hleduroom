@@ -61,6 +61,15 @@ export default function Header() {
                 </Link>
               ))}
             </div>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSemkKuEIESe-tL0TR7YgSQLBXGu8TQKydzQQjsKKizCo7IKmw/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-blue-600 text-white text-center mt-3 px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Register
+            </a>
           </div>
         )}
       </div>

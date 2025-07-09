@@ -40,6 +40,17 @@ export const NoteForm = () => {
                     <label htmlFor="chapter" className="block text-gray-700 text-sm font-bold mb-2">Chapter</label>
                     <input type="text" id="chapter" name="chapter" required className="w-full px-4 py-3 rounded-lg bg-gray-100 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
+                <div>
+                    <label htmlFor="level" className="block text-gray-700 text-sm font-bold mb-2">Level</label>
+                    <input 
+                      type="text" 
+                      id="level" 
+                      name="level" 
+                      required 
+                      className="w-full px-4 py-3 rounded-lg bg-gray-100 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="e.g., Class 11, CEE"
+                    />
+                </div>
                  <div>
                     <label htmlFor="pdfLink" className="block text-gray-700 text-sm font-bold mb-2">PDF Link</label>
                     <input type="url" id="pdfLink" name="pdfLink" required className="w-full px-4 py-3 rounded-lg bg-gray-100 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://example.com/note.pdf" />

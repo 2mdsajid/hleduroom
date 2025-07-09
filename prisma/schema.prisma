@@ -30,6 +30,7 @@ model Note {
   subject    String
   chapter    String
   youtubeUrl String?
+  level String?
   pdfLink    String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt

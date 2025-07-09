@@ -2,19 +2,24 @@ import React from 'react';
 import { getNotes } from '@/lib/actions/dashboard.actions';
 import { TNote } from '@/lib/schema/dashboard.schema';
 import FilterControls from '@/components/note-filter';
-import { DeleteNoteButton } from '@/components/note-delete-button'; // 1. Import the delete button
+import { DeleteNoteButton } from '@/components/note-delete-button';
 
 type Props = {
   searchParams?: { [key: string]: string | string[] | undefined };
 };
 
-// Helper function to get unique subjects and their associated chapters
+// Helper function to get unique filter data including levels
 const getFilterData = (notes: TNote[]) => {
   const subjects = new Set<string>();
+  const levels = new Set<string>(); // 1. Set for unique levels
   const subjectChapterMap: { [subject: string]: string[] } = {};
 
   notes.forEach(note => {
     subjects.add(note.subject);
+    if (note.level) { // Ensure level exists before adding
+      levels.add(note.level);
+    }
+    
     if (!subjectChapterMap[note.subject]) {
       subjectChapterMap[note.subject] = [];
     }
@@ -29,6 +34,7 @@ const getFilterData = (notes: TNote[]) => {
 
   return {
     uniqueSubjects: ['all', ...Array.from(subjects).sort()],
+    uniqueLevels: ['all', ...Array.from(levels).sort()], // 2. Return unique levels
     subjectChapterMap: subjectChapterMap,
   };
 };
@@ -52,20 +58,21 @@ const getYouTubeEmbedUrl = (url: string | null): string | null => {
 };
 
 const Page = async ({ searchParams }: Props) => {
-  // Fetch notes directly from the database
   const notes = await getNotes() as TNote[];
 
   const selectedSubject = searchParams?.subject as string || 'all';
   const selectedChapter = searchParams?.chapter as string || 'all';
+  const selectedLevel = searchParams?.level as string || 'all'; // 3. Get selected level from params
 
-  // Filter notes based on URL search parameters
+  // Filter notes based on URL search parameters, including level
   const filteredNotes = notes.filter(note => {
     const matchesSubject = selectedSubject === 'all' || note.subject === selectedSubject;
     const matchesChapter = selectedChapter === 'all' || note.chapter === selectedChapter;
-    return matchesSubject && matchesChapter;
+    const matchesLevel = selectedLevel === 'all' || note.level === selectedLevel; // 4. Add level to filter logic
+    return matchesSubject && matchesChapter && matchesLevel;
   });
 
-  const { uniqueSubjects, subjectChapterMap } = getFilterData(notes);
+  const { uniqueSubjects, subjectChapterMap, uniqueLevels } = getFilterData(notes);
 
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -75,6 +82,7 @@ const Page = async ({ searchParams }: Props) => {
         <FilterControls
           uniqueSubjects={uniqueSubjects}
           subjectChapterMap={subjectChapterMap}
+          uniqueLevels={uniqueLevels} // 5. Pass unique levels to filter controls
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
@@ -82,15 +90,21 @@ const Page = async ({ searchParams }: Props) => {
             filteredNotes.map((note) => {
               const embedUrl = getYouTubeEmbedUrl(note.youtubeUrl);
               return (
-                // 2. Card layout updated to support a footer
                 <div key={note.id} className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:scale-[1.02]">
                   
-                  {/* Main content of the card */}
                   <div className="p-6 flex-grow">
                     <h2 className="text-2xl font-bold text-gray-900 mb-3">{note.title}</h2>
-                    <p className="text-sm font-medium text-indigo-600 mb-2">
-                      Subject: <span className="font-normal capitalize">{note.subject}</span>
-                    </p>
+                    <div className="flex flex-wrap gap-x-4 mb-4 text-sm">
+                      <p className="font-medium text-indigo-600">
+                        Subject: <span className="font-normal capitalize">{note.subject}</span>
+                      </p>
+                      {/* 6. Display the level on the card */}
+                      {note.level && (
+                        <p className="font-medium text-teal-600">
+                          Level: <span className="font-normal capitalize">{note.level}</span>
+                        </p>
+                      )}
+                    </div>
                     <p className="text-sm font-medium text-blue-600 mb-4">
                       Chapter: <span className="font-normal">{formatChapterName(note.chapter)}</span>
                     </p>
@@ -132,9 +146,6 @@ const Page = async ({ searchParams }: Props) => {
                       </div>
                     )}
                   </div>
-                  
-                  
-
                 </div>
               );
             })

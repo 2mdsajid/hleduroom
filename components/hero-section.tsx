@@ -46,7 +46,7 @@ export default function HeroSection() {
                 </Button>
               </Link>
               <a
-                href={socialMediaLinks.whatsapp}
+                href={'https://chat.whatsapp.com/Esup9YY4R3xGVM20QFI372'}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto"
@@ -77,13 +77,25 @@ export default function HeroSection() {
 
           {/* Right Content - Hero Image */}
           <div className="relative">
-            <div className="relative z-10">
+            <a href="https://youtube.com/@h.l.eduroom" target="_blank" rel="noopener noreferrer" className="relative z-10 block">
               <img
                 src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Students studying online"
+                alt="Hleduroom YouTube Channel"
                 className="w-full h-auto rounded-2xl shadow-2xl"
               />
-            </div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div className="rounded-full bg-blue-500 flex items-center justify-center w-20 h-20">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-12 w-12 text-white opacity-75 hover:opacity-90"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            </a>
             {/* Floating Cards */}
             <div className="absolute -top-4 -left-4 bg-white p-4 rounded-lg shadow-lg z-20">
               <div className="flex items-center space-x-2">

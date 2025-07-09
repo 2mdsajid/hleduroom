@@ -5,6 +5,7 @@ export const socialMediaLinks = {
   telegram:"https://t.me/hleduroom",
   phoone:"+9779827728726",
   whatsapp: "https://wa.me/9779703869612",
+  tiktok:"https://www.tiktok.com/@h.l.eduroom",
 }
 
 export const address = "janakpurdham, Madhesh"

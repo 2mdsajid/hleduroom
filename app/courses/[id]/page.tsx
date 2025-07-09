@@ -78,7 +78,7 @@ export default async function CourseDetailPage({ params }: { params: { id:string
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href={socialMediaLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="flex-1">
+                <a href={'https://docs.google.com/forms/d/e/1FAIpQLSemkKuEIESe-tL0TR7YgSQLBXGu8TQKydzQQjsKKizCo7IKmw/viewform'} target="_blank" rel="noopener noreferrer" className="flex-1">
                   <Button size="lg" className="w-full"><Play className="h-5 w-5 mr-2" />Enroll Now</Button>
                 </a>
                 <a href={socialMediaLinks.youtube} target="_blank" rel="noopener noreferrer">
@@ -148,7 +148,7 @@ export default async function CourseDetailPage({ params }: { params: { id:string
                 <div className="flex justify-between"><span className="text-gray-600">Level:</span><span className="font-medium">{course.level}</span></div>
                 <div className="flex justify-between"><span className="text-gray-600">Category:</span><span className="font-medium">{course.category}</span></div>
                 <div className="pt-4 border-t space-y-3">
-                  <a href={socialMediaLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="w-full">
+                  <a href={'https://docs.google.com/forms/d/e/1FAIpQLSemkKuEIESe-tL0TR7YgSQLBXGu8TQKydzQQjsKKizCo7IKmw/viewform'} target="_blank" rel="noopener noreferrer" className="w-full">
                     <Button className="w-full" size="lg"><Play className="h-5 w-5 mr-2" />Enroll Now</Button>
                   </a>
                   {/* <Button variant="outline" className="w-full bg-transparent"><Download className="h-5 w-5 mr-2" />Download Brochure</Button> */}

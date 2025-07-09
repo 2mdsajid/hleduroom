@@ -1,6 +1,7 @@
-import React from 'react';
+'use client'; // 1. This is now a client component to handle state and user interaction
+
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { DeleteNoticeButton } from '../notice-delete-button'; // 1. Import the delete button
 
 // Define the type for a single notice item
 interface Notice {
@@ -17,12 +18,23 @@ interface NoticeSectionProps {
 }
 
 const NoticeSection: React.FC<NoticeSectionProps> = ({ notices, viewAllLink = '/notices' }) => {
+  // 2. State to track the ID of the currently expanded notice
+  const [expandedNoticeId, setExpandedNoticeId] = useState<string | null>(null);
+
+  // 3. Function to toggle the expanded state of a notice
+  const handleNoticeClick = (noticeId: string) => {
+    if (expandedNoticeId === noticeId) {
+      setExpandedNoticeId(null); // Collapse if it's already open
+    } else {
+      setExpandedNoticeId(noticeId); // Expand the clicked notice
+    }
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-xl overflow-hidden  max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
+    <div className="bg-white rounded-lg shadow-xl overflow-hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
       {/* Header */}
       <div className="bg-blue-600 text-white p-4 flex items-center justify-between rounded-t-lg">
         <div className="flex items-center">
-          {/* Bell Icon */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -41,7 +53,6 @@ const NoticeSection: React.FC<NoticeSectionProps> = ({ notices, viewAllLink = '/
         </div>
         <Link href={viewAllLink} className="flex items-center text-sm font-semibold hover:underline">
           View All
-          {/* Arrow Icon */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -59,11 +70,13 @@ const NoticeSection: React.FC<NoticeSectionProps> = ({ notices, viewAllLink = '/
       <div className="p-4 divide-y divide-gray-200">
         {notices.length > 0 ? (
           notices.map((notice) => (
-            <div key={notice.id} className="flex py-4 first:pt-0 last:pb-0">
-              {/* Red vertical line and icon container */}
+            <div
+              key={notice.id}
+              className="flex py-4 first:pt-0 last:pb-0 cursor-pointer" // 5. Added cursor-pointer
+              onClick={() => handleNoticeClick(notice.id)} // 3. Added click handler
+            >
               <div className="relative flex-shrink-0 mr-4">
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-red-500 top-0 bottom-0 z-0"></div>
-                {/* Clock Icon */}
                 <div className="relative z-10 bg-white p-1 rounded-full text-red-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -82,23 +95,21 @@ const NoticeSection: React.FC<NoticeSectionProps> = ({ notices, viewAllLink = '/
                 </div>
               </div>
 
-              {/* Notice Content */}
-              {/* 2. Layout updated to space content and button apart */}
-              <div className="flex-grow flex justify-between items-start gap-4">
+              <div className="flex-grow">
                 <div>
                   <h3 className="text-gray-900 font-semibold text-lg mb-1 leading-tight">{notice.title}</h3>
                   {notice.description && (
-                    <p className="text-gray-700 text-sm mb-1 line-clamp-2">
+                    <p
+                      // 4. Conditional class for expanding/collapsing the description
+                      className={`text-gray-700 text-sm mb-1 transition-all duration-300 ease-in-out ${
+                        expandedNoticeId === notice.id ? 'line-clamp-none' : 'line-clamp-2'
+                      }`}
+                    >
                       {notice.description}
                     </p>
                   )}
-                  <p className="text-gray-500 text-xs">{notice.date as any}</p>
+                  <p className="text-gray-500 text-xs">{new Date(notice.date).toLocaleDateString()}</p>
                 </div>
-
-                {/* 3. Delete button added here */}
-                {/* <div className="flex-shrink-0">
-                  <DeleteNoticeButton noticeId={notice.id} />
-                </div> */}
               </div>
             </div>
           ))
