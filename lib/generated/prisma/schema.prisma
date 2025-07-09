@@ -42,3 +42,46 @@ model Notice {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+model Course {
+  id            String  @id @default(cuid())
+  title         String
+  description   String  @db.Text
+  price         Int
+  originalPrice Int
+  duration      String
+  image         String?
+  students      Int
+  rating        Float
+  reviews       Int
+  category      String
+  level         String
+  isPopular     Boolean @default(false)
+
+  // Arrays of strings
+  features     String[]
+  whatYouLearn String[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Contact {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  category  String
+  message   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MockTest {
+  id        String   @id @default(cuid())
+  title     String
+  link      String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

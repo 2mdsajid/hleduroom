@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { socialMediaLinks } from "@/lib/data/social-media"
 import { Play, Users, BookOpen, Award, MessageCircle } from "lucide-react"
 import Link from "next/link"
 
@@ -39,13 +40,13 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link href="/courses">
+              <Link href="/resources">
                 <Button size="lg" className="w-full sm:w-auto">
-                  Start Learning Now
+                  Free Resources
                 </Button>
               </Link>
               <a
-                href="https://wa.me/9779876543210"
+                href={socialMediaLinks.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto"

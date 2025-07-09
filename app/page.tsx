@@ -8,6 +8,7 @@ import JoinNowCTA from "@/components/join-now-cta"
 import NoticeSection from "@/components/ui/notice-section"
 import { notices } from "@/lib/data/notices"
 import HomePageNoticeSection from "@/components/home/home-page-notice-section"
+import PopularCoursesSkeleton from "@/components/popular-course-skeleton"
 
 export default function HomePage() {
 
@@ -16,7 +17,7 @@ export default function HomePage() {
       <HeroSection />
       <HomePageNoticeSection />
       <FeaturesSection />
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100" />}>
+      <Suspense fallback={<PopularCoursesSkeleton />}>
         <PopularCourses />
       </Suspense>
       <TestimonialsSection />

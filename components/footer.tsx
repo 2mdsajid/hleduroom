@@ -19,17 +19,14 @@ export default function Footer() {
             </p>
 
             <div className="flex space-x-4">
-              <a href={socialMediaLinks.facebook} className="text-gray-400 hover:text-blue-400">
+              <a href={socialMediaLinks.facebook} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href={socialMediaLinks.instagram} className="text-gray-400 hover:text-blue-400">
+              <a href={socialMediaLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href={socialMediaLinks.youtube} className="text-gray-400 hover:text-blue-400">
+              <a href={socialMediaLinks.youtube} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400">
                 <Youtube className="h-5 w-5" />
-              </a>
-              <a href={socialMediaLinks.twitter} className="text-gray-400 hover:text-blue-400">
-                <Twitter className="h-5 w-5" />
               </a>
             </div>
           </div>
@@ -44,39 +41,15 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/mock-tests" className="text-gray-400 hover:text-white">
+                <Link href="/mock" className="text-gray-400 hover:text-white">
                   Mock Tests
                 </Link>
               </li>
-              {/* <li>
-                <Link href="/instructors" className="text-gray-400 hover:text-white">
-                  Instructors
-                </Link>
-              </li> */}
-              {/* <li>
-                <Link href="/blog" className="text-gray-400 hover:text-white">
-                  Blog
-                </Link>
-              </li> */}
               <li>
                 <Link href="/faq" className="text-gray-400 hover:text-white">
                   FAQ
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          {/* Courses */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Popular Courses</h3>
-            <ul className="space-y-2">
-              {allCourses.map((course) => (
-                <li key={course.id}>
-                  <Link href={`/courses/${course.id}`} className="text-gray-400 hover:text-white">
-                    {course.title}
-                  </Link>
-                </li>
-              ))}
             </ul>
           </div>
 
@@ -111,17 +84,23 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">© 2024 Hleduroom. All rights reserved.</p>
-          {/* <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="/privacy" className="text-gray-400 hover:text-white text-sm">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="text-gray-400 hover:text-white text-sm">
-              Terms of Service
-            </Link>
-            <Link href="/refund" className="text-gray-400 hover:text-white text-sm">
-              Refund Policy
-            </Link>
-          </div> */}
+          
+          {/* --- ADDED CREDIT LINE --- */}
+          <div className="text-gray-500 text-sm mt-4 md:mt-0">
+            Made with 
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 inline-block mx-1 text-red-500" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            by &nbsp;
+            <a 
+              href="https://sajidaalam.com.np/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-blue-400 hover:text-white font-medium"
+            >
+               sajid(c0mrad1)
+            </a>
+          </div>
         </div>
       </div>
     </footer>

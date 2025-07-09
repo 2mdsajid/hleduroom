@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -9,7 +8,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Send, CheckCircle } from "lucide-react"
+import { Send, CheckCircle, AlertTriangle, X } from "lucide-react" // Added icons
+import { createContact } from "@/lib/actions/contact.actions"
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -22,13 +22,21 @@ export default function ContactForm() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null) // State for error messages
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError(null) // Clear previous errors on new submission
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    // Assuming createContact returns { data, error }
+    const { data, error: submissionError } = await createContact(formData)
+
+    if (submissionError as any) {
+      setError(submissionError || "An unexpected error occurred. Please try again.")
+      setIsSubmitting(false)
+      return
+    }
 
     setIsSubmitting(false)
     setIsSubmitted(true)
@@ -48,6 +56,10 @@ export default function ContactForm() {
   }
 
   const handleInputChange = (field: string, value: string) => {
+    // Clear error when user starts correcting the form
+    if (error) {
+      setError(null)
+    }
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
@@ -115,7 +127,7 @@ export default function ContactForm() {
             <div className="space-y-2">
               <Label htmlFor="category">Inquiry Type *</Label>
               <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
-                <SelectTrigger>
+                <SelectTrigger id="category">
                   <SelectValue placeholder="Select inquiry type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -155,12 +167,18 @@ export default function ContactForm() {
             />
           </div>
 
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <p className="text-blue-800 text-sm">
-              <strong>Quick Response:</strong> For urgent inquiries, please call us directly at +977 98-76543210 or
-              message us on WhatsApp for immediate assistance.
-            </p>
-          </div>
+          {/* --- ERROR MESSAGE BOX --- */}
+          {error && (
+            <div className="bg-red-50 border border-red-300 text-red-900 rounded-lg p-4 flex items-center justify-between">
+              <div className="flex items-center">
+                 <AlertTriangle className="h-5 w-5 mr-3 flex-shrink-0" />
+                 <p className="text-sm">{error}</p>
+              </div>
+              <button onClick={() => setError(null)} type="button" className="text-red-900 hover:text-red-700">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+          )}
 
           <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
             {isSubmitting ? (

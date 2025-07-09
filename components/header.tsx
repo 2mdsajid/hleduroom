@@ -11,8 +11,8 @@ export default function Header() {
   const navigation = [
     { name: "Home", href: "/" },
     { name: "Courses", href: "/courses" },
-    { name: "Notes", href: "/notes" },
-    { name: "Instructors", href: "/instructor" },
+    { name: "Resources", href: "/resources" },
+    {name:"Mock Tests", href :"/mock"},
     { name: "Contact", href: "/contact" },
   ]
 
@@ -22,8 +22,8 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <BookOpen className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold text-gray-900">Hleduroom</span>
+            <img src="/thumbnail.jpg" alt="Hleduroom Logo" className="h-14 w-auto" />
+            <span className="text-xl font-bold text-gray-900 sr-only">Hleduroom</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -39,15 +39,6 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Desktop CTA */}
-          {/* <div className="hidden md:flex items-center space-x-4">
-            <Link href="/login">
-              <Button variant="outline">Login</Button>
-            </Link>
-            <Link href="/signup">
-              <Button>Join Now</Button>
-            </Link>
-          </div> */}
 
           {/* Mobile menu button */}
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden p-2">
@@ -69,16 +60,6 @@ export default function Header() {
                   {item.name}
                 </Link>
               ))}
-              <div className="flex flex-col space-y-2 pt-4 border-t">
-                <Link href="/login">
-                  <Button variant="outline" className="w-full bg-transparent">
-                    Login
-                  </Button>
-                </Link>
-                <Link href="/signup">
-                  <Button className="w-full">Join Now</Button>
-                </Link>
-              </div>
             </div>
           </div>
         )}

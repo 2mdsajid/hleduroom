@@ -1,12 +1,12 @@
 export const socialMediaLinks = {
   facebook: "https://www.facebook.com/hleduroom",
-  instagram: "https://www.instagram.com/hleduroom",
-  youtube: "https://www.youtube.com/hleduroom",
-  twitter: "https://twitter.com/hleduroom",
-  phoone:"+9779876543210",
-  whatsapp: "https://wa.me/9779876543210",
+  instagram: "https://www.instagram.com/h.l.eduroom",
+  youtube: "https://youtube.com/@h.l.eduroom",
+  telegram:"https://t.me/hleduroom",
+  phoone:"+9779827728726",
+  whatsapp: "https://wa.me/9779703869612",
 }
 
-export const address = "Putalisadak, Kathmandu"
+export const address = "janakpurdham, Madhesh"
 export const officeHour = "9AM - 6PM"
-export const email = "info@hleduroom.com"
+export const email = "hleduroom@gmail.com"

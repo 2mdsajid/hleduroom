@@ -13,6 +13,7 @@ import {
   Headphones,
   Users,
 } from "lucide-react"
+import { address, email, socialMediaLinks } from "@/lib/data/social-media"
 
 export default function ContactInfo() {
   return (
@@ -30,8 +31,7 @@ export default function ContactInfo() {
             <Phone className="h-5 w-5 text-blue-600 mt-1" />
             <div>
               <p className="font-medium text-gray-900">Phone</p>
-              <p className="text-gray-600">+977 98-76543210</p>
-              <p className="text-gray-600">+977 01-4567890</p>
+              <p className="text-gray-600">{socialMediaLinks.phoone}</p>
             </div>
           </div>
 
@@ -39,8 +39,7 @@ export default function ContactInfo() {
             <Mail className="h-5 w-5 text-blue-600 mt-1" />
             <div>
               <p className="font-medium text-gray-900">Email</p>
-              <p className="text-gray-600">info@hleduroom.com</p>
-              <p className="text-gray-600">support@hleduroom.com</p>
+              <p className="text-gray-600">{email}</p>
             </div>
           </div>
 
@@ -49,9 +48,7 @@ export default function ContactInfo() {
             <div>
               <p className="font-medium text-gray-900">Address</p>
               <p className="text-gray-600">
-                Putalisadak, Kathmandu
-                <br />
-                Nepal - 44600
+                {address}
               </p>
             </div>
           </div>
@@ -81,7 +78,7 @@ export default function ContactInfo() {
         <CardContent>
           <p className="text-green-700 mb-4">Get instant support and quick answers to your questions via WhatsApp.</p>
           <a
-            href="https://wa.me/9779876543210?text=Hi, I need help with Hleduroom courses"
+            href={socialMediaLinks.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full"
@@ -95,7 +92,7 @@ export default function ContactInfo() {
       </Card>
 
       {/* Department Contacts */}
-      <Card>
+      {/* <Card>
         <CardHeader>
           <CardTitle>Department Contacts</CardTitle>
         </CardHeader>
@@ -124,7 +121,7 @@ export default function ContactInfo() {
             </div>
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
 
       {/* Social Media */}
       <Card>
@@ -134,24 +131,21 @@ export default function ContactInfo() {
         <CardContent>
           <p className="text-gray-600 mb-4">Stay connected for updates and tips</p>
           <div className="flex space-x-3">
-            <a href="#" className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <a href={socialMediaLinks.facebook} className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
               <Facebook className="h-4 w-4" />
             </a>
-            <a href="#" className="p-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors">
+            <a href={socialMediaLinks.instagram} className="p-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors">
               <Instagram className="h-4 w-4" />
             </a>
-            <a href="#" className="p-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+            <a href={socialMediaLinks.youtube} className="p-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
               <Youtube className="h-4 w-4" />
-            </a>
-            <a href="#" className="p-2 bg-blue-400 text-white rounded-lg hover:bg-blue-500 transition-colors">
-              <Twitter className="h-4 w-4" />
             </a>
           </div>
         </CardContent>
       </Card>
 
       {/* Emergency Contact */}
-      <Card className="bg-red-50 border-red-200">
+      {/* <Card className="bg-red-50 border-red-200">
         <CardHeader>
           <CardTitle className="text-red-800">Emergency Contact</CardTitle>
         </CardHeader>
@@ -160,7 +154,7 @@ export default function ContactInfo() {
           <p className="font-semibold text-red-800">+977 98-11111111</p>
           <p className="text-red-600 text-xs mt-1">Available 24/7 during exam periods</p>
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   )
 }
