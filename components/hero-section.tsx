@@ -11,7 +11,7 @@ export default function HeroSection() {
           {/* Left Content */}
           <div className="text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-              Join the <span className="text-blue-600">#1 NEB</span> & Entrance Preparation Platform
+              Join the <span className="text-blue-600">#1 NEB & Entrance</span> Preparation Platform
             </h1>
             <p className="mt-6 text-xl text-gray-600 leading-relaxed">
               Master your NEB, CEE, and MBBS entrance exams with our comprehensive platform featuring live classes,
