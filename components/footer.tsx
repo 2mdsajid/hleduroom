@@ -59,7 +59,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="hleduroom.blogspot.com" className="text-gray-400 hover:text-white">
+                <Link target="_blank" href="https://hleduroom.blogspot.com/" className="text-gray-400 hover:text-white">
                   Blogspot
                 </Link>
               </li>

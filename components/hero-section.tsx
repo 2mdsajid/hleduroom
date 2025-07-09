@@ -40,12 +40,17 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link href="/resources">
+              <Link href="/courses">
                 <Button size="lg" className="w-full sm:w-auto">
+                  Start Learning
+                </Button>
+              </Link>
+              <Link href="/resources">
+                <Button size="lg" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-900">
                   Free Resources
                 </Button>
               </Link>
-              <a
+              {/* <a
                 href={'https://chat.whatsapp.com/Esup9YY4R3xGVM20QFI372'}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -53,9 +58,9 @@ export default function HeroSection() {
               >
                 <Button size="lg" variant="outline" className="w-full bg-transparent">
                   <MessageCircle className="h-5 w-5 mr-2" />
-                  WhatsApp Us
+                  WhatsApp Group
                 </Button>
-              </a>
+              </a> */}
             </div>
 
             {/* Stats */}
