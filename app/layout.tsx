@@ -8,7 +8,7 @@ import Footer from "@/components/footer"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Hleduroom - #1 NEB & Entrance Preparation Platform",
+  title: "H.L.-Eduroom - #1 NEB & Entrance Preparation Platform",
   description:
     "Join the leading NEB & Entrance preparation platform with live classes, mock tests, expert tutors, and comprehensive study materials.",
   keywords: "NEB preparation, entrance exam, MBBS, CEE, mock tests, live classes, Nepal education",

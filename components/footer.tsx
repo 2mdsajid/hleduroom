@@ -12,7 +12,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="flex items-center space-x-2 mb-4">
               <BookOpen className="h-8 w-8 text-blue-400" />
-              <span className="text-xl font-bold">Hleduroom</span>
+              <span className="text-xl font-bold">H.L.-Eduroom</span>
             </Link>
             <p className="text-gray-400 mb-4">
               Nepal's #1 platform for NEB & Entrance preparation with expert guidance and comprehensive study materials.
