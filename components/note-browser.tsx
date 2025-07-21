@@ -7,7 +7,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 
 export type TFilterData = {
     [level: string]: {
-        [subject:string]: string[]
+        [subject: string]: string[]
     }
 };
 
@@ -37,16 +37,17 @@ const formatName = (name: string) => {
     return name.split(/_|-/).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 };
 
-const getYouTubeEmbedUrl = (url: string | null): string | null => {
-    if (!url) return null;
+const getYouTubeEmbedUrl = (url: string | null): string => {
+    if (!url) return '';
     try {
-        const videoUrl = new URL(url);
-        const videoId = videoUrl.searchParams.get("v");
-        return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
-    } catch {
-        return null;
+      const videoUrl = new URL(url);
+      const videoId = videoUrl.searchParams.get("v");
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : '';
+    } catch (error) {
+      console.error("Invalid YouTube URL:", error);
+      return '';
     }
-};
+  };
 
 // --- FILTER CONTROLS COMPONENT ---
 interface FilterControlsProps {
@@ -81,7 +82,7 @@ const FilterControls: React.FC<FilterControlsProps> = ({
             const allChapters = new Set<string>();
             const relevantLevels = selectedLevel === 'all' ? Object.values(filterData) : [filterData[selectedLevel]];
             relevantLevels.forEach(levelData => {
-                if(levelData) Object.values(levelData).forEach(chapterList => chapterList.forEach(chapter => allChapters.add(chapter)));
+                if (levelData) Object.values(levelData).forEach(chapterList => chapterList.forEach(chapter => allChapters.add(chapter)));
             });
             return ['all', ...Array.from(allChapters).sort()];
         }
@@ -183,7 +184,7 @@ const NoteBrowser = () => {
                 selectedChapter={selectedChapter} setSelectedChapter={setSelectedChapter}
             />
             {isLoading ? (
-                 <div className="text-center p-10">Loading...</div>
+                <div className="text-center p-10">Loading...</div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
                     {filteredNotes.length > 0 ? (
@@ -196,6 +197,28 @@ const NoteBrowser = () => {
                                         <p className="font-medium text-indigo-600">Subject: <span className="font-normal capitalize">{formatName(note.subject)}</span></p>
                                     </div>
                                     <p className="text-sm font-medium text-blue-600 mb-4">Chapter: <span className="font-normal">{formatName(note.chapter)}</span></p>
+                                    {getYouTubeEmbedUrl(note.youtubeUrl) && (
+                                        <div className="mb-5">
+                                            <h3 className="text-lg font-semibold text-gray-800 mb-2">Video Lecture:</h3>
+                                            <div className="relative aspect-video">
+                                                <iframe
+                                                    className="absolute top-0 left-0 w-full h-full rounded-lg shadow-md"
+                                                    src={note.youtubeUrl ? getYouTubeEmbedUrl(note.youtubeUrl) : ""}
+                                                    title={note.title}
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                    allowFullScreen
+                                                ></iframe>
+                                            </div>
+                                            <a
+                                                href={note.youtubeUrl!}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="mt-3 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                            >
+                                                Watch on YouTube
+                                            </a>
+                                        </div>
+                                    )}
                                     {note.pdfLink && <a href={note.pdfLink} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700">View PDF</a>}
                                 </div>
                             </div>
